@@ -1,6 +1,6 @@
 package jp.co.ulsystems.example.geode.todo;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,13 +16,13 @@ public class TodoController {
 
 	@RequestMapping("/")
 	public String index(Model model) {
-		ArrayList<TodoItem> todoList = (ArrayList<TodoItem>) repository.findAll();
+		List<TodoItem> todoList = (List<TodoItem>) repository.findAll();
 		model.addAttribute("newitem", new TodoItem());
 		model.addAttribute("items", new TodoListViewModel(todoList));
 		return "index";
 	}
 
-	@RequestMapping("/add")
+	@RequestMapping("/create")
 	public String addTodo(@ModelAttribute TodoItem requestItem) {
 		TodoItem item = new TodoItem(requestItem.getCategory(), requestItem.getName());
 		repository.save(item);
